@@ -21,7 +21,6 @@ class Nostr_Login_Handler {
 
     public function init() {
         add_action('login_enqueue_scripts', array($this, 'enqueue_scripts'));
-        add_action('login_enqueue_scripts', array($this, 'enqueue_styles'));
         add_action('login_form', array($this, 'add_nostr_login_field'));
         add_action('wp_ajax_nostr_login', array($this, 'ajax_nostr_login'));
         add_action('wp_ajax_nopriv_nostr_login', array($this, 'ajax_nostr_login'));
@@ -219,10 +218,6 @@ class Nostr_Login_Handler {
             'nonce' => wp_create_nonce('nostr-login-nonce'),
             'relays' => array_filter(explode("\n", get_option('nostr_login_relays', implode("\n", $this->default_relays))))
         ));
-    }
-
-    public function enqueue_styles() {
-        wp_enqueue_style('nostr-login', plugin_dir_url(dirname(__FILE__)) . 'assets/css/nostr-login.css', array(), '1.0');
     }
 
     public function add_nostr_login_field() {
