@@ -37,7 +37,7 @@ class Nostr_Login_Handler {
     }
 
     public function add_admin_menu() {
-        add_options_page('Nostr Login Settings', 'Nostr Login', 'manage_options', 'nostr-login', array($this, 'options_page'));
+        add_options_page(__('Nostr Login Settings', 'nostr-login'), __('Nostr Login', 'nostr-login'), 'manage_options', 'nostr-login', array($this, 'options_page'));
     }
 
     public function register_settings() {
@@ -69,21 +69,21 @@ class Nostr_Login_Handler {
 
     public function add_custom_user_profile_fields($user) {
         ?>
-        <h3><?php _e("Nostr Information", "nostr-login"); ?></h3>
+        <h3><?php esc_html_e("Nostr Information", "nostr-login"); ?></h3>
     
         <table class="form-table">
             <tr>
-                <th><label for="nostr_public_key"><?php _e("Nostr Public Key", "nostr-login"); ?></label></th>
+                <th><label for="nostr_public_key"><?php esc_html_e("Nostr Public Key", "nostr-login"); ?></label></th>
                 <td>
                     <input type="text" name="nostr_public_key" id="nostr_public_key" value="<?php echo esc_attr(get_user_meta($user->ID, 'nostr_public_key', true)); ?>" class="regular-text" readonly />
-                    <p class="description"><?php _e("Your Nostr public key.", "nostr-login"); ?></p>
+                    <p class="description"><?php esc_html_e("Your Nostr public key.", "nostr-login"); ?></p>
                 </td>
             </tr>
             <tr>
-                <th><label for="Nip05"><?php _e("Nostr Nip05", "nostr-login"); ?></label></th>
+                <th><label for="nip05"><?php esc_html_e("Nostr Nip05", "nostr-login"); ?></label></th>
                 <td>
                     <input type="text" name="nip05" id="nip05" value="<?php echo esc_attr(get_user_meta($user->ID, 'nip05', true)); ?>" class="regular-text" readonly />
-                    <p class="description"><?php _e("Your Nostr Nip05 address.", "nostr-login"); ?></p>
+                    <p class="description"><?php esc_html_e("Your Nostr Nip05 address.", "nostr-login"); ?></p>
                 </td>
             </tr>
 
@@ -199,7 +199,7 @@ class Nostr_Login_Handler {
             $avatar_url = esc_url_raw($metadata['image']);
             update_user_meta($user_id, 'nostr_avatar', $avatar_url);
             $saved_avatar_url = get_user_meta($user_id, 'nostr_avatar', true);
-            nostr_login_debug_log("Saved Nostr avatar URL for user $user_id: " . $saved_avatar_url);
+            nostr_login_debug_log("Saved Nostr avatar URL for user $user_id: " . esc_url($saved_avatar_url));
     
         }        
         if (!empty($metadata['website'])) {
@@ -234,17 +234,17 @@ class Nostr_Login_Handler {
         <div class="nostr-login-container">
             <label for="nostr_login_toggle" class="nostr-toggle-label">
                 <input type="checkbox" id="nostr_login_toggle">
-                <span><?php _e('Use Nostr Login', 'nostr-login'); ?></span>
+                <span><?php esc_html_e('Use Nostr Login', 'nostr-login'); ?></span>
             </label>
             <?php wp_nonce_field('nostr_login_action', 'nostr_login_nonce'); ?>
         </div>
         <p class="nostr-login-field" style="display:none;">
-            <label for="nostr_private_key"><?php _e('Nostr Private Key', 'nostr-login'); ?></label>
+            <label for="nostr_private_key"><?php esc_html_e('Nostr Private Key', 'nostr-login'); ?></label>
             <input type="password" name="nostr_private_key" id="nostr_private_key" class="input" size="20" autocapitalize="off" />
         </p>
         <p class="nostr-login-buttons" style="display:none;">
-            <button type="button" id="use_nostr_extension" class="button"><?php _e('Use Nostr Extension', 'nostr-login'); ?></button>
-            <input type="submit" name="wp-submit" id="nostr-wp-submit" class="button button-primary" value="<?php _e('Log In with Nostr', 'nostr-login'); ?>">
+            <button type="button" id="use_nostr_extension" class="button"><?php esc_html_e('Use Nostr Extension', 'nostr-login'); ?></button>
+            <input type="submit" name="wp-submit" id="nostr-wp-submit" class="button button-primary" value="<?php esc_attr_e('Log In with Nostr', 'nostr-login'); ?>">
         </p>
         <div id="nostr-login-feedback" style="display:none;"></div>
         <?php
