@@ -3,7 +3,7 @@
 Plugin Name: YEGHRO Nostr Login
 Plugin URI: https://github.com/Yeghro/YEGHRO_NostrLogin
 Description: A plugin that allows users to log in using Nostr.
-Version: 1.0
+Version: 1.1
 Author: Your YEGHRO
 Author URI: https://YEGHRO.site/
 License: GPLv2 or later
